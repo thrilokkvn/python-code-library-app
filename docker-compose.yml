@@ -1,6 +1,8 @@
 services:
   database:
     image: thrilokkd/python-libapp:db_image
+    deploy:
+      replicas: 1
     ports:
       - "3306:3306"
     networks:
@@ -8,6 +10,8 @@ services:
   
   auth_service:
     image: thrilokkd/python-libapp:auth_service
+    deploy:
+      replicas: 1
     ports:
       - "5001:5001"
     networks:
@@ -17,6 +21,8 @@ services:
 
   book_service:
     image: thrilokkd/python-libapp:book_service
+    deploy:
+      replicas: 1
     ports:
       - "5002:5002"
     networks:
@@ -26,6 +32,8 @@ services:
 
   borrow_service:
     image: thrilokkd/python-libapp:borrow_service
+    deploy:
+      replicas: 1
     ports:
       - "5003:5003"
     networks:
@@ -35,6 +43,8 @@ services:
 
   frontend:
     image: thrilokkd/python-libapp:frontend
+    deploy:
+      replicas: 1
     ports:
       - "5000:5000"
     networks:

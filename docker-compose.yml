@@ -1,0 +1,49 @@
+services:
+  database:
+    image: thrilokkd/python-libapp:db_image
+    ports:
+      - "3306:3306"
+    networks:
+      - my-network
+  
+  auth_service:
+    image: thrilokkd/python-libapp:auth_service
+    ports:
+      - "5001:5001"
+    networks:
+      - my-network
+    depends_on:
+     - database
+
+  book_service:
+    image: thrilokkd/python-libapp:book_service
+    ports:
+      - "5002:5002"
+    networks:
+      - my-network
+    depends_on:
+     - database
+
+  borrow_service:
+    image: thrilokkd/python-libapp:borrow_service
+    ports:
+      - "5003:5003"
+    networks:
+      - my-network
+    depends_on:
+     - database
+
+  frontend:
+    image: thrilokkd/python-libapp:frontend
+    ports:
+      - "5000:5000"
+    networks:
+      - my-network
+    depends_on:
+     - auth_service
+     - book_service
+     - borrow_service
+
+networks:
+  my-network:
+    driver: overlay
